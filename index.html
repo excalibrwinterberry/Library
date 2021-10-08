@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+</head>
+<body align="center">
+    <div class="header">
+        <h1>Library</h1>
+    </div>
+    <div class="addBook">
+            <label for="email">Title:</label>
+            <input type="text" id="title" placeholder="Title" name="title">
+            <label for="Author">Author:</label>
+            <input type="text" id="author" placeholder="Author" name="author">
+            <label for="Pages">Pages:</label>
+            <input type="number" name="pages" id="pages">
+            <label>
+                Read <input type="checkbox" name="read" id="read"> 
+            </label>
+            <button id="bookAdd">Add to Library
+            </button>
+
+        <!-- input for adding book -->
+
+    </div>
+    <div class="display">
+        <table id="books">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Read</th>
+                  </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            
+        </table>
+        <!-- displaying the list of books -->
+    </div>
+</body>
+</html>

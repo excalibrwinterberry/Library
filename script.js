@@ -1,6 +1,6 @@
 //array to hold book objects
 let myLibrary = [
-    new Book("The Hobbit", "J.R. Tolkien", 321, true)
+    Book("The Hobbit", "J.R. Tolkien", 321, true)
 ]
 
 //book display section
@@ -8,10 +8,8 @@ const books = document.getElementsByClassName('display')[0]
 
 //constructor for book object
 function Book(title, author, pages, read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
+    return {title, author, pages, read}
+    
 }
 
 
@@ -111,10 +109,10 @@ function addBookToLibrary(event){
     const pages = document.getElementById("pages").value
     const read = document.getElementById("read").checked
 
-    const book = new Book(title, author, pages, read)
+    const book =  Book(title, author, pages, read)
     myLibrary.push(book)
 
-    addBookToDisplay(title, author, pages, read)
+    displayBooks()
 
     document.getElementById("title").value = ''
     document.getElementById("author").value = ''

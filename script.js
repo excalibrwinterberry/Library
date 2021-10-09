@@ -12,42 +12,62 @@ function Book(title, author, pages, read){
 }
 
 function displayBooks(){
-    myLibrary.forEach((book) => {
-        addBookToDisplay(book.title, book.author, book.pages, book.read)
+    books.innerHTML = ''
+    myLibrary.forEach((book, index) => {
+        addBookToDisplay(book.title, book.author, book.pages, book.read,  index)
     });
+
+    const removeBtns = [...document.getElementsByClassName('remove')]
+
+    removeBtns.forEach((removeBtn) => {
+        removeBtn.addEventListener('click', removeBook)
+    })
+
+
 }
 
-function addBookToDisplay(bookTitle, bookAuthor, bookPages, bookRead){
+function removeBook(event){
+    const bookId = event.target.id
+    myLibrary.splice(bookId, 1)
+    displayBooks()
+    
+}
+
+function addBookToDisplay(bookTitle, bookAuthor, bookPages, bookRead, bookIndex){
     const bookCard  = document.createElement('div')
-        const bookHeader = document.createElement('div')
-        const bookBody = document.createElement('div')
-        bookCard.classList.add('card')
-        bookHeader.classList.add('bookTitle')
-        bookBody.classList.add('bookBody')
+    const bookHeader = document.createElement('div')
+    const bookBody = document.createElement('div')
+    bookCard.classList.add('card')
+    bookHeader.classList.add('bookTitle')
+    bookBody.classList.add('bookBody')
 
-        const title = document.createElement('p')
-        const author = document.createElement('p')
-        const pages = document.createElement('p')
-        const read = document.createElement('p')
+    const title = document.createElement('p')
+    const author = document.createElement('p')
+    const pages = document.createElement('p')
+    const read = document.createElement('p')
 
-        title.textContent = bookTitle
-        author.textContent = bookAuthor
-        pages.textContent = bookPages
-        read.textContent = bookRead
+    const remove = document.createElement('button')
+    remove.classList.add('remove')
+    remove.setAttribute('id', `${bookIndex}`)
 
-        bookHeader.appendChild(title)
-        bookBody.appendChild(author)
-        bookBody.appendChild(pages)
-        bookBody.appendChild(read)
+    title.textContent = bookTitle
+    author.textContent = bookAuthor
+    pages.textContent = bookPages
+    read.textContent = bookRead
 
-        bookCard.appendChild(bookHeader)
-        bookCard.appendChild(bookBody)
+    remove.textContent = "Remove"
 
-        books.appendChild(bookCard)
+    bookHeader.appendChild(title)
+    bookBody.appendChild(author)
+    bookBody.appendChild(pages)
+    bookBody.appendChild(read)
+
+    bookCard.appendChild(bookHeader)
+    bookCard.appendChild(bookBody)
+    bookCard.appendChild(remove)
+
+    books.appendChild(bookCard)
 }
-
-
-
 
 
 function addBookToLibrary(event){
@@ -59,7 +79,7 @@ function addBookToLibrary(event){
     const book = new Book(title, author, pages, read)
     myLibrary.push(book)
 
-    addBookToDisplay(title, author, pages, read)
+    displayBooks()
 
     document.getElementById("title").value = ''
     document.getElementById("author").value = ''
@@ -69,7 +89,8 @@ function addBookToLibrary(event){
 
 }
 
-
 document.getElementById('bookAdd').addEventListener('click', addBookToLibrary)
 
 displayBooks()
+
+

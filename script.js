@@ -20,23 +20,23 @@ function displayBooks(){
         addBookToDisplay(book.title, book.author, book.pages, book.read,  index)
     });
 
-    const removeBtns = [...document.getElementsByClassName('remove')]
+    // const removeBtns = [...document.getElementsByClassName('remove')]
 
-    removeBtns.forEach((removeBtn) => {
-        removeBtn.addEventListener('click', removeBook)
-    })
+    // removeBtns.forEach((removeBtn) => {
+    //     removeBtn.addEventListener('click', removeBook)
+    // })
 
-    const changeBtns = [...document.getElementsByClassName('change')]
+    // const changeBtns = [...document.getElementsByClassName('change')]
 
-    changeBtns.forEach((changeBtn) =>{
-        changeBtn.addEventListener('click', changeRead)
-    })
+    // changeBtns.forEach((changeBtn) =>{
+    //     changeBtn.addEventListener('click', changeRead)
+    // })
 
 
 }
 
 //function to change the status of read of a book object 
-function changeRead(event){
+function changeReadEvent(event){
 
     const bookId = parseInt(event.target.parentElement.id.substring(4))
     //change read in myLibrary
@@ -58,27 +58,36 @@ function removeBook(event){
 
 //function to add a book to the end of the display section
 function addBookToDisplay(bookTitle, bookAuthor, bookPages, bookRead, bookIndex){
+    //creating divs to store data
     const bookCard  = document.createElement('div')
     const bookHeader = document.createElement('div')
     const bookBody = document.createElement('div')
+
+
+    //adding class to add style
     bookCard.classList.add('card')
     bookHeader.classList.add('bookTitle')
     bookBody.classList.add('bookBody')
 
     bookCard.setAttribute('id', `book${bookIndex}`)
 
+    //adding p tag to hold data
     const title = document.createElement('p')
     const author = document.createElement('p')
     const pages = document.createElement('p')
     const read = document.createElement('p')
 
+    //remove button
     const remove = document.createElement('button')
     remove.classList.add('remove')
     remove.setAttribute('id', `${bookIndex}`)
+    remove.addEventListener('click', removeBook)
 
+    //read button
     const changeRead = document.createElement('button')
     changeRead.classList.add('change')
     changeRead.setAttribute('id', `read${bookIndex}`)
+    changeRead.addEventListener('click', changeReadEvent)
 
     title.textContent = bookTitle
     author.textContent = bookAuthor
